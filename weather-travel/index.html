@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Atlas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="."><span class="brand-mark">◌</span> Weather Atlas</a>
+      <div class="topbar-meta"><span id="last-updated">Ready to explore</span><button id="unit-toggle" class="unit-toggle" type="button">°C <span>/ °F</span></button></div>
+    </header>
+    <section class="hero-grid">
+      <div class="hero-copy"><p class="eyebrow">FIELD NOTES / LIVE CONDITIONS</p><h1>Go outside<br><em>better prepared.</em></h1><p class="lede">Weather intelligence for the curious traveler. Find your forecast, then let the day tell you what to pack.</p>
+        <form id="search-form" class="search-form"><label for="city-input">Where are you headed?</label><div class="search-row"><input id="city-input" type="search" placeholder="Search a city..." autocomplete="off"><button type="submit" aria-label="Search city">→</button></div></form>
+        <p id="status" class="status" role="status">Detecting your location...</p>
+      </div>
+      <div class="current-panel" id="current-panel"><div class="panel-kicker">CURRENT READ</div><div class="current-location"><div><h2 id="location-name">Your location</h2><p id="location-time">Local conditions</p></div><span id="weather-icon" class="weather-icon">☼</span></div><div class="temperature"><span id="temperature">--</span><sup>°</sup><span id="temperature-unit">C</span></div><p id="condition" class="condition">Waiting for a forecast</p><div class="metrics"><div><b id="feels-like">--</b><span>Feels like</span></div><div><b id="humidity">--</b><span>Humidity</span></div><div><b id="wind">--</b><span>Wind</span></div></div></div>
+    </section>
+    <section class="content-section"><div class="section-heading"><div><p class="eyebrow">THE NEXT FIVE DAYS</p><h2>Forecast rhythm</h2></div><p class="section-note">A glanceable plan for the days ahead.</p></div><div id="forecast-grid" class="forecast-grid"></div></section>
+    <section class="recommendation-section"><div class="recommendation-card"><div class="recommendation-icon">✦</div><div><p class="eyebrow">ATLAS SUGGESTS</p><h2 id="recommendation-title">Pack your curiosity.</h2><p id="recommendation-text">Search for a city to receive thoughtful travel notes tailored to the conditions.</p></div></div></section>
+    <footer><span>WEATHER ATLAS / PERSONAL FIELD GUIDE</span><span>Powered by Open-Meteo</span></footer>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
