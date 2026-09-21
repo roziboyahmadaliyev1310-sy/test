@@ -54,13 +54,30 @@ export function getDestination(value) {
 export function buildPlan(destination, days, style) {
     const multiplier = style === 'comfort' ? 1.55 : style === 'slow' ? 0.82 : 1;
     const daily = Math.round(destination.base * multiplier);
+    const placeCount = destination.places.length;
+    const seenPairs = new Set();
     const itinerary = Array.from({
         length: days
-    }, (_, index) => ({
-        day: index + 1,
-        places: [destination.places[(index * 2) % destination.places.length], destination.places[(index * 2 + 1) % destination.places.length]],
-        note: index === 0 ? 'Start gently and get your bearings.' : index === days - 1 ? 'Keep the last day flexible for a final favorite.' : 'Leave space for a slow lunch and an unplanned turn.'
-    }));
+    }, (_, index) => {
+        let firstIndex = (index * 2) % placeCount;
+        let secondIndex = (firstIndex + 1 + Math.floor(index / 2)) % placeCount;
+        let pairKey = [firstIndex, secondIndex].sort((a, b) => a - b).join('|');
+
+        let attempts = 0;
+        while (seenPairs.has(pairKey) && attempts < placeCount) {
+            secondIndex = (secondIndex + 1) % placeCount;
+            pairKey = [firstIndex, secondIndex].sort((a, b) => a - b).join('|');
+            attempts += 1;
+        }
+
+        seenPairs.add(pairKey);
+
+        return {
+            day: index + 1,
+            places: [destination.places[firstIndex], destination.places[secondIndex]],
+            note: index === 0 ? 'Start gently and get your bearings.' : index === days - 1 ? 'Keep the last day flexible for a final favorite.' : 'Leave space for a slow lunch and an unplanned turn.'
+        };
+    });
     return {
         ...destination,
         daily,
