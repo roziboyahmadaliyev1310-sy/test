@@ -2,6 +2,7 @@ import {
     getDestination,
     buildPlan
 } from './api.js';
+import { getWeatherByCity } from '../weather-travel/api.js';
 
 const $ = (id) => document.getElementById(id);
 const saved = JSON.parse(localStorage.getItem('trip-plan') || 'null');
@@ -66,12 +67,30 @@ function getDetails(plan) {
     };
 }
 
+function renderForecast(forecast) {
+    const days = forecast.list.filter((item) => item.dt_txt.includes('12:00:00')).slice(0, 5);
+    return days.map((day) => `<span><strong>${new Date(day.dt * 1000).toLocaleDateString(undefined, { weekday: 'short' })}</strong>${Math.round(day.main.temp_max)}° / ${Math.round(day.main.temp_min)}°<small>${day.weather[0].description}</small></span>`).join('');
+}
+
+async function loadForecast(plan) {
+    const forecast = $('live-forecast');
+    if (!forecast) return;
+    forecast.innerHTML = '<span class="forecast-loading">Loading live forecast...</span>';
+    try {
+        const [, weatherForecast] = await getWeatherByCity(plan.name);
+        forecast.innerHTML = renderForecast(weatherForecast);
+    } catch (error) {
+        forecast.innerHTML = `<span class="forecast-loading">${error.message}</span>`;
+    }
+}
+
 function render(plan) {
     const info = getDetails(plan);
     const days = plan.itinerary.map((day) => `<article class="day"><span class="day-number">DAY ${String(day.day).padStart(2, '0')}</span><div><h3>${day.places.join(' + ')}</h3><p>${day.note}</p></div><span class="day-cost">${money(plan.daily, plan.symbol)}</span></article>`).join('');
     const apps = info.apps.map(([name, purpose, url]) => `<a href="${url}" target="_blank" rel="noreferrer"><strong>${name}</strong><span>${purpose} ↗</span></a>`).join('');
 
-    $('plan').innerHTML = `<div class="plan-head"><div><p class="eyebrow">YOUR 7-DAY FIELD ROUTE</p><h2>${plan.name}, ${plan.country}</h2><p>Seven days / ${plan.currency} estimate</p></div><div class="cost"><span>ESTIMATED TOTAL</span><strong>${money(plan.total, plan.symbol)}</strong><small>${money(plan.daily, plan.symbol)} per day · standard plan</small></div></div><div class="days">${days}</div><div class="trip-details"><article class="detail-card weather-detail"><p class="eyebrow">WEATHER FORECAST</p><h3>Pack for the season.</h3><p>${info.weather}</p><a href="weather-travel/">Open the live forecast ↗</a></article><article class="detail-card"><p class="eyebrow">USEFUL APPS</p><h3>Download before you go.</h3><div class="resource-list">${apps}</div></article><article class="detail-card budget-detail"><p class="eyebrow">7-DAY TRIP COST</p><h3>${money(plan.total, plan.symbol)} total</h3><p>Daily estimate: ${money(plan.daily, plan.symbol)}. This covers local transport, meals, and entry tickets. Flights and hotels are separate.</p><a href="currency-converter/">Check exchange rates ↗</a></article><article class="detail-card hotel-detail"><p class="eyebrow">HOTEL RESERVATION</p><h3>Reserve your hotel.</h3><p>Compare available rooms and locations near your first stop.</p><a class="hotel-button" href="${info.hotel}" target="_blank" rel="noreferrer">Search hotels in ${plan.name} ↗</a></article></div><p class="estimate-note">Estimates are planning guides, not live prices. Check transport, weather, entry rules, and hotel cancellation terms before booking.</p>`;
+    $('plan').innerHTML = `<div class="plan-head"><div><p class="eyebrow">YOUR 7-DAY FIELD ROUTE</p><h2>${plan.name}, ${plan.country}</h2><p>Seven days / ${plan.currency} estimate</p></div><div class="cost"><span>ESTIMATED TOTAL</span><strong>${money(plan.total, plan.symbol)}</strong><small>${money(plan.daily, plan.symbol)} per day · standard plan</small></div></div><div class="days">${days}</div><div class="trip-details"><article class="detail-card weather-detail"><p class="eyebrow">LIVE WEATHER FORECAST</p><h3>Pack for the season.</h3><p>${info.weather}</p><div class="live-forecast" id="live-forecast" aria-live="polite"></div></article><article class="detail-card"><p class="eyebrow">USEFUL APPS</p><h3>Download before you go.</h3><div class="resource-list">${apps}</div></article><article class="detail-card budget-detail"><p class="eyebrow">7-DAY TRIP COST</p><h3>${money(plan.total, plan.symbol)} total</h3><p>Daily estimate: ${money(plan.daily, plan.symbol)}. This covers local transport, meals, and entry tickets. Flights and hotels are separate.</p><a href="currency-converter/">Check exchange rates ↗</a></article><article class="detail-card hotel-detail"><p class="eyebrow">HOTEL RESERVATION</p><h3>Reserve your hotel.</h3><p>Compare available rooms and locations near your first stop.</p><a class="hotel-button" href="${info.hotel}" target="_blank" rel="noreferrer">Search hotels in ${plan.name} ↗</a></article></div><p class="estimate-note">Estimates are planning guides, not bookings. Check transport, weather, entry rules, and hotel cancellation terms before booking.</p>`;
+    loadForecast(plan);
 }
 
 $('planner-form').addEventListener('submit', (event) => {
