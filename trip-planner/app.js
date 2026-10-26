@@ -1,11 +1,22 @@
 import {
-    getDestination,
-    buildPlan
+    buildPlan,
+    getCountryDirectory,
+    resolveDestination
 } from './api.js';
 import { getWeatherByCity } from '../weather-travel/api.js';
 
 const $ = (id) => document.getElementById(id);
 const saved = JSON.parse(localStorage.getItem('trip-plan') || 'null');
+
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, (character) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    })[character]);
+}
 
 function money(value, symbol) {
     return `${symbol}${value.toLocaleString()}`;
@@ -69,7 +80,7 @@ function getDetails(plan) {
 
 function renderForecast(forecast) {
     const days = forecast.list.filter((item) => item.dt_txt.includes('12:00:00')).slice(0, 5);
-    return days.map((day) => `<span><strong>${new Date(day.dt * 1000).toLocaleDateString(undefined, { weekday: 'short' })}</strong>${Math.round(day.main.temp_max)}° / ${Math.round(day.main.temp_min)}°<small>${day.weather[0].description}</small></span>`).join('');
+    return days.map((day) => `<span><strong>${escapeHTML(new Date(day.dt * 1000).toLocaleDateString(undefined, { weekday: 'short' }))}</strong>${Math.round(day.main.temp_max)}° / ${Math.round(day.main.temp_min)}°<small>${escapeHTML(day.weather[0].description)}</small></span>`).join('');
 }
 
 async function loadForecast(plan) {
@@ -86,22 +97,62 @@ async function loadForecast(plan) {
 
 function render(plan) {
     const info = getDetails(plan);
-    const days = plan.itinerary.map((day) => `<article class="day"><span class="day-number">DAY ${String(day.day).padStart(2, '0')}</span><div><h3>${day.places.join(' + ')}</h3><p>${day.note}</p></div><span class="day-cost">${money(plan.daily, plan.symbol)}</span></article>`).join('');
-    const apps = info.apps.map(([name, purpose, url]) => `<a href="${url}" target="_blank" rel="noreferrer"><strong>${name}</strong><span>${purpose} ↗</span></a>`).join('');
+    const days = plan.itinerary.map((day) => `<article class="day"><span class="day-number">DAY ${String(day.day).padStart(2, '0')}</span><div><h3>${escapeHTML(day.places.join(' + '))}</h3><p>${escapeHTML(day.note)}</p></div><span class="day-cost">${escapeHTML(money(plan.daily, plan.symbol))}</span></article>`).join('');
+    const apps = info.apps.map(([name, purpose, url]) => `<a href="${escapeHTML(url)}" target="_blank" rel="noreferrer"><strong>${escapeHTML(name)}</strong><span>${escapeHTML(purpose)} ↗</span></a>`).join('');
+    const sourceNote = plan.isCountryDestination
+        ? `Starting in ${plan.name}, the capital of ${plan.country}. Place suggestions are based on nearby Wikipedia articles.`
+        : `Places near ${plan.name}, ${plan.country}, suggested from nearby Wikipedia articles.`;
 
-    $('plan').innerHTML = `<div class="plan-head"><div><p class="eyebrow">YOUR 7-DAY FIELD ROUTE</p><h2>${plan.name}, ${plan.country}</h2><p>Seven days / ${plan.currency} estimate</p></div><div class="cost"><span>ESTIMATED TOTAL</span><strong>${money(plan.total, plan.symbol)}</strong><small>${money(plan.daily, plan.symbol)} per day · standard plan</small></div></div><div class="days">${days}</div><div class="trip-details"><article class="detail-card weather-detail"><p class="eyebrow">LIVE WEATHER FORECAST</p><h3>Pack for the season.</h3><p>${info.weather}</p><div class="live-forecast" id="live-forecast" aria-live="polite"></div></article><article class="detail-card"><p class="eyebrow">USEFUL APPS</p><h3>Download before you go.</h3><div class="resource-list">${apps}</div></article><article class="detail-card budget-detail"><p class="eyebrow">7-DAY TRIP COST</p><h3>${money(plan.total, plan.symbol)} total</h3><p>Daily estimate: ${money(plan.daily, plan.symbol)}. This covers local transport, meals, and entry tickets. Flights and hotels are separate.</p><a href="currency-converter/">Check exchange rates ↗</a></article><article class="detail-card hotel-detail"><p class="eyebrow">HOTEL RESERVATION</p><h3>Reserve your hotel.</h3><p>Compare available rooms and locations near your first stop.</p><a class="hotel-button" href="${info.hotel}" target="_blank" rel="noreferrer">Search hotels in ${plan.name} ↗</a></article></div><p class="estimate-note">Estimates are planning guides, not bookings. Check transport, weather, entry rules, and hotel cancellation terms before booking.</p>`;
+    $('plan').innerHTML = `<div class="plan-head"><div><p class="eyebrow">YOUR 7-DAY FIELD ROUTE</p><h2>${escapeHTML(plan.name)}, ${escapeHTML(plan.country)}</h2><p>Seven days / ${escapeHTML(plan.currency)} estimate</p></div><div class="cost"><span>ESTIMATED TOTAL</span><strong>${escapeHTML(money(plan.total, plan.symbol))}</strong><small>${escapeHTML(money(plan.daily, plan.symbol))} per day · standard plan</small></div></div><p class="plan-source">${escapeHTML(sourceNote)}</p><div class="days">${days}</div><div class="trip-details"><article class="detail-card weather-detail"><p class="eyebrow">LIVE WEATHER FORECAST</p><h3>Pack for the season.</h3><p>${escapeHTML(info.weather)}</p><div class="live-forecast" id="live-forecast" aria-live="polite"></div></article><article class="detail-card"><p class="eyebrow">USEFUL APPS</p><h3>Download before you go.</h3><div class="resource-list">${apps}</div></article><article class="detail-card budget-detail"><p class="eyebrow">7-DAY TRIP COST</p><h3>${escapeHTML(money(plan.total, plan.symbol))} total</h3><p>Daily estimate: ${escapeHTML(money(plan.daily, plan.symbol))}. This covers local transport, meals, and entry tickets. Flights and hotels are separate.</p>${plan.budgetNote ? `<p>${escapeHTML(plan.budgetNote)}</p>` : ''}<a href="currency-converter/">Check exchange rates ↗</a></article><article class="detail-card hotel-detail"><p class="eyebrow">HOTEL RESERVATION</p><h3>Reserve your hotel.</h3><p>Compare available rooms and locations near your first stop.</p><a class="hotel-button" href="${escapeHTML(info.hotel)}" target="_blank" rel="noreferrer">Search hotels in ${escapeHTML(plan.name)} ↗</a></article></div><p class="estimate-note">Estimates are planning guides, not bookings. Check transport, weather, entry rules, and hotel cancellation terms before booking.</p>`;
     loadForecast(plan);
 }
 
-$('planner-form').addEventListener('submit', (event) => {
+const plannerForm = $('planner-form');
+const plannerStatus = $('planner-status');
+const submitButton = plannerForm.querySelector('button[type="submit"]');
+
+function setStatus(message, state = 'info') {
+    plannerStatus.textContent = message;
+    plannerStatus.dataset.state = state;
+}
+
+getCountryDirectory()
+    .then((countries) => {
+        const suggestions = $('destination-list');
+        countries
+            .filter((country) => country.capital)
+            .forEach((country) => {
+                const option = document.createElement('option');
+                option.value = country.name;
+                suggestions.append(option);
+            });
+    })
+    .catch((error) => {
+        setStatus('Country suggestions are unavailable. You can still search for a city.', 'error');
+        console.error('Could not load country suggestions.', error);
+    });
+
+plannerForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const plan = buildPlan(getDestination($('destination').value), 7, 'smart');
-    render(plan);
-    localStorage.setItem('trip-plan', JSON.stringify(plan));
+    submitButton.disabled = true;
+    setStatus('Looking up the destination and nearby places...');
+
+    try {
+        const destination = await resolveDestination($('destination').value);
+        const plan = buildPlan(destination, 7, 'smart');
+        render(plan);
+        localStorage.setItem('trip-plan', JSON.stringify(plan));
+        setStatus(`Found ${plan.places.length} nearby places for ${plan.name}.${plan.budgetNote ? ` ${plan.budgetNote}` : ''}`);
+    } catch (error) {
+        const message = error instanceof Error ? error.message : 'Could not build the trip plan.';
+        setStatus(message, 'error');
+        console.error('Could not build trip plan.', error);
+    } finally {
+        submitButton.disabled = false;
+    }
 });
 
-if (saved) {
-    const plan = buildPlan(getDestination(saved.name), 7, 'smart');
-    $('destination').value = plan.name;
-    render(plan);
+if (saved && Array.isArray(saved.itinerary)) {
+    $('destination').value = saved.query || saved.name;
+    render(saved);
 }

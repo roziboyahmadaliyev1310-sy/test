@@ -63,8 +63,15 @@ export const getWeatherByCoordinates = (latitude, longitude, units = 'metric', p
     })]) :
     getOpenMeteoByCoordinates(latitude, longitude, units, place);
 
-export async function searchLocations(query) {
-    const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=100&language=en&format=json`);
+export async function searchLocations(query, countryCode) {
+    const params = new URLSearchParams({
+        name: query,
+        count: '100',
+        language: 'en',
+        format: 'json'
+    });
+    if (countryCode) params.set('countryCode', countryCode);
+    const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?${params}`);
     if (!response.ok) throw new Error('Location search is unavailable.');
     return (await response.json()).results || [];
 }

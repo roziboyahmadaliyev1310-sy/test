@@ -1,10 +1,13 @@
 # API Atlas
 
-Three modular Vanilla JavaScript applications:
+Four modular Vanilla JavaScript applications:
 
 - `weather-travel/` - geolocation weather, five-day forecast, units, and travel recommendations.
 - `currency-converter/` - fiat and crypto conversion, swap control, persistence, and a Chart.js trend view.
 - `media-library/` - TMDB movie search, Google Books search, detail modal, and a local saved list.
+- `trip-planner/` - live city or country search with nearby place suggestions and a seven-day itinerary.
+
+The trip planner gets country/capital data from [Countries](https://github.com/annexare/Countries), city coordinates from Open-Meteo, nearby place suggestions from Wikipedia (classified with Wikidata), and currency estimates from ExchangeRate-API. Country searches start in the country's capital. These services need an internet connection; place suggestions are nearby Wikipedia articles, not an official or guaranteed list of attractions.
 
 ## Run
 

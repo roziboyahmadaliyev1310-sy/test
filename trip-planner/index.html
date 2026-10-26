@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
   <link href="style.css" rel="stylesheet"/>
     <style>
-     .planner-form{background:#e4efe7;border:1px solid #c7dace}.live-forecast{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:20px}.live-forecast span{display:flex;flex-direction:column;gap:5px;padding:10px;background:#eef5ef;color:var(--ink);font-size:12px}.live-forecast strong{font:600 12px 'Space Grotesk';text-transform:uppercase}.live-forecast small{color:var(--muted);font-size:10px;line-height:1.3}.forecast-loading{grid-column:1/-1;color:var(--muted)!important;background:transparent!important;padding:0!important}@media(max-width:700px){.live-forecast{grid-template-columns:repeat(2,1fr)}}
+     .planner-form{background:#e4efe7;border:1px solid #c7dace}.destination-hint{display:block;margin-top:9px;color:var(--muted);font-size:12px;line-height:1.5}.planner-status{min-height:1.4em;margin:0;color:var(--muted);font-size:13px;line-height:1.5}.planner-status[data-state="error"]{color:#b34f3c}.planner-form button:disabled{cursor:wait;opacity:.7}.plan-source{margin:0 0 18px;color:var(--muted);font-size:13px;line-height:1.5}.live-forecast{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:20px}.live-forecast span{display:flex;flex-direction:column;gap:5px;padding:10px;background:#eef5ef;color:var(--ink);font-size:12px}.live-forecast strong{font:600 12px 'Space Grotesk';text-transform:uppercase}.live-forecast small{color:var(--muted);font-size:10px;line-height:1.3}.forecast-loading{grid-column:1/-1;color:var(--muted)!important;background:transparent!important;padding:0!important}@media(max-width:700px){.live-forecast{grid-template-columns:repeat(2,1fr)}}
     </style>
  </head>
  <body>
@@ -48,27 +48,10 @@
       <label for="destination">
        Where do you want to go?
       </label>
-      <input id="destination" list="destination-list" placeholder="Seoul, Paris, Tashkent..." required=""/>
+      <input id="destination" list="destination-list" placeholder="Any city or country..." aria-describedby="destination-hint" required=""/>
+      <small class="destination-hint" id="destination-hint">Search any city, or choose a country to get places near its capital.</small>
      </div>
      <datalist id="destination-list">
-      <option>
-       Seoul
-      </option>
-      <option>
-       Busan
-      </option>
-      <option>
-       Paris
-      </option>
-      <option>
-       London
-      </option>
-      <option>
-       Tokyo
-      </option>
-      <option>
-       Tashkent
-      </option>
      </datalist>
      <button type="submit">
       Show my 7-day trip
@@ -78,6 +61,7 @@
      </button>
     </form>
    </section>
+   <p class="planner-status" id="planner-status" role="status" aria-live="polite"></p>
    <section aria-live="polite" class="plan" id="plan">
     <div class="empty">
      <span>
@@ -104,4 +88,3 @@
   </script>
  </body>
 </html>
-
