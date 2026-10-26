@@ -1,6 +1,7 @@
 const API_KEY = 'YOUR_OPENWEATHERMAP_API_KEY';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 const OPEN_METEO_URL = 'https://api.open-meteo.com/v1/forecast';
+const EXCHANGE_RATE_URL = 'https://api.frankfurter.dev/v1';
 
 const openMeteoCondition = (code) => {
     if (code >= 95) return {
@@ -62,10 +63,36 @@ export const getWeatherByCoordinates = (latitude, longitude, units = 'metric') =
     })]) :
     getOpenMeteoByCoordinates(latitude, longitude, units);
 
-async function getOpenMeteoByCity(city, units) {
-    const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=10&language=en&format=json`);
+export async function searchLocations(query) {
+    const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=100&language=en&format=json`);
     if (!response.ok) throw new Error('Location search is unavailable.');
-    const places = (await response.json()).results || [];
+    return (await response.json()).results || [];
+}
+
+export async function getCurrencies() {
+    const response = await fetch(`${EXCHANGE_RATE_URL}/currencies`);
+    if (!response.ok) throw new Error('Currency list is unavailable. Please try again later.');
+    return response.json();
+}
+
+export async function getExchangeRate(base, quote) {
+    const params = new URLSearchParams({
+        base,
+        symbols: quote
+    });
+    const response = await fetch(`${EXCHANGE_RATE_URL}/latest?${params}`);
+    if (!response.ok) throw new Error('Exchange rate is unavailable. Please try again later.');
+    const data = await response.json();
+    const rate = data.rates?.[quote];
+    if (typeof rate !== 'number') throw new Error(`No exchange rate is available for ${base} to ${quote}.`);
+    return {
+        rate,
+        date: data.date
+    };
+}
+
+async function getOpenMeteoByCity(city, units) {
+    const places = await searchLocations(city);
     const place = places.find((item) => item.feature_code === 'PPLC' || item.feature_code === 'PPLA') || places[0];
     if (!place) throw new Error(`Could not find “${city}”. Try a city or country name.`);
     return getOpenMeteoByCoordinates(place.latitude, place.longitude, units, place);
