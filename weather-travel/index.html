@@ -13,136 +13,74 @@
  </head>
  <body>
   <main class="app-shell">
-   <header class="topbar">
-    <a class="brand" href=".">
-     <span class="brand-mark">
-      ◌
-     </span>
-     Global Trip Guide
-    </a>
-    <div class="topbar-meta">
-     <span id="last-updated">
-      Ready to explore
-     </span>
-     <button class="unit-toggle" id="unit-toggle" type="button">
-      °C
-      <span>
-       / °F
-      </span>
-     </button>
+   <header class="topbar" data-reveal>
+    <div class="topbar-inner">
+     <div class="topbar-main">
+      <a class="brand" href=".">
+       <span class="brand-mark">◌</span>
+       Global Trip Guide
+      </a>
+      <div class="topbar-meta">
+       <span id="last-updated">Ready to explore</span>
+       <button class="unit-toggle" id="unit-toggle" type="button">°C <span>/ °F</span></button>
+      </div>
+     </div>
+     <nav aria-label="Trip guide sections" class="trip-nav">
+      <a class="nav-link is-active" href="#destination"><span aria-hidden="true">⌖</span> Destination</a>
+      <a class="nav-link" href="#forecast"><span aria-hidden="true">☼</span> Weather</a>
+      <a class="nav-link" href="#currency"><span aria-hidden="true">¤</span> Currency</a>
+     </nav>
     </div>
    </header>
-   <section aria-label="Introduction to Global Trip Guide" class="intro-video">
-    <div class="intro-video-copy">
-     <p class="intro-kicker">YOUR NEXT TRIP, BETTER PLANNED</p>
-     <h2>Plan the trip.<br/><em>Enjoy the journey.</em></h2>
-     <p>Explore any destination, check the local weather, and convert currencies before you go.</p>
-    </div>
-    <div aria-hidden="true" class="intro-animation">
-     <div class="intro-globe"><span>WORLD</span></div>
-     <span class="intro-orbit orbit-one"></span>
-     <span class="intro-orbit orbit-two"></span>
-     <span class="intro-weather weather-sun">☼</span>
-     <span class="intro-weather weather-cloud">☁</span>
-     <span class="intro-weather weather-rain">☂</span>
-     <div class="intro-scenes">
-      <div class="intro-scene scene-one"><small>01 / PICK A DESTINATION</small><strong>Explore somewhere new</strong></div>
-      <div class="intro-scene scene-two"><small>02 / WEATHER &amp; EXCHANGE</small><strong>Know before you go</strong></div>
-      <div class="intro-scene scene-three"><small>03 / MAKE IT YOUR TRIP</small><strong>Go out prepared</strong></div>
+   <section aria-labelledby="destination-title" class="destination-hero" data-reveal id="destination">
+    <div class="destination-hero-inner">
+     <div class="destination-copy">
+      <p class="hero-eyebrow">YOUR TRIP STARTS HERE</p>
+      <h1 id="destination-title">Find your<br/><em>next destination.</em></h1>
+      <p>Check the local forecast and convert your travel money before you go.</p>
      </div>
-    </div>
-   </section>
-   <section class="hero-grid">
-    <div class="hero-copy">
-     <p class="eyebrow">
-      FIELD NOTES / LIVE CONDITIONS
-     </p>
-     <h1>
-      Go outside
-      <br/>
-      <em>
-       better prepared.
-      </em>
-     </h1>
-     <p class="lede">
-      Your travel companion for destination weather and currency conversion. Pick a place, check the forecast, and plan with confidence.
-     </p>
-     <form class="search-form" id="search-form">
-      <label for="city-input">
-       Where are you headed?
-      </label>
+     <div aria-hidden="true" class="destination-art">
+      <span class="art-sun"></span>
+      <span class="art-cloud cloud-one">☁</span>
+      <span class="art-cloud cloud-two">☁</span>
+      <span class="art-orbit"></span>
+      <span class="art-coordinate">35° 41′ N&nbsp; / &nbsp;139° 41′ E</span>
+      <span class="art-caption">A WORLD OF POSSIBILITIES</span>
+     </div>
+     <form class="search-form destination-search" id="search-form">
+      <label class="sr-only" for="city-input">Search a destination</label>
       <div class="search-row">
-       <input autocomplete="off" id="city-input" placeholder="Search any location..." type="search"/>
-       <button aria-label="Search location" type="submit">
-        →
-       </button>
+       <span aria-hidden="true" class="search-icon">⌖</span>
+       <input autocomplete="off" id="city-input" placeholder="Where do you want to go?" type="search"/>
+       <button aria-label="Search destination" type="submit">Search <span aria-hidden="true">→</span></button>
       </div>
       <ul aria-label="Matching locations" class="location-results" id="location-results"></ul>
      </form>
-     <p class="status" id="status" role="status">
-      Detecting your location...
-     </p>
+     <p class="status" id="status" role="status">Detecting your location...</p>
+    </div>
+   </section>
+   <section aria-labelledby="current-title" class="weather-overview" data-reveal>
+    <div class="weather-overview-copy">
+     <p class="eyebrow">YOUR TRIP, AT A GLANCE</p>
+     <h2 id="current-title">Know before<br/>you go.</h2>
+     <p>Live conditions and a five-day outlook for the place you want to explore.</p>
     </div>
     <div class="current-panel" id="current-panel">
-     <div class="panel-kicker">
-      CURRENT READ
-     </div>
+     <div class="panel-kicker">CURRENT CONDITIONS</div>
      <div class="current-location">
-      <div>
-       <h2 id="location-name">
-        Your location
-       </h2>
-       <p id="location-time">
-        Local conditions
-       </p>
-      </div>
-      <span class="weather-icon" id="weather-icon">
-       ☼
-      </span>
+      <div><h2 id="location-name">Your location</h2><p id="location-time">Local conditions</p></div>
+      <span class="weather-icon" id="weather-icon">☼</span>
      </div>
-     <div class="temperature">
-      <span id="temperature">
-       --
-      </span>
-      <sup>
-       °
-      </sup>
-      <span id="temperature-unit">
-       C
-      </span>
-     </div>
-     <p class="condition" id="condition">
-      Waiting for a forecast
-     </p>
+     <div class="temperature"><span id="temperature">--</span><sup>°</sup><span id="temperature-unit">C</span></div>
+     <p class="condition" id="condition">Waiting for a forecast</p>
      <div class="metrics">
-      <div>
-       <b id="feels-like">
-        --
-       </b>
-       <span>
-        Feels like
-       </span>
-      </div>
-      <div>
-       <b id="humidity">
-        --
-       </b>
-       <span>
-        Humidity
-       </span>
-      </div>
-      <div>
-       <b id="wind">
-        --
-       </b>
-       <span>
-        Wind
-       </span>
-      </div>
+      <div><b id="feels-like">--</b><span>Feels like</span></div>
+      <div><b id="humidity">--</b><span>Humidity</span></div>
+      <div><b id="wind">--</b><span>Wind</span></div>
      </div>
     </div>
    </section>
-   <section class="content-section">
+   <section class="content-section" data-reveal id="forecast">
     <div class="section-heading">
      <div>
       <p class="eyebrow">
@@ -159,7 +97,7 @@
     <div class="forecast-grid" id="forecast-grid">
     </div>
    </section>
-   <section aria-labelledby="currency-title" class="currency-section">
+   <section aria-labelledby="currency-title" class="currency-section" data-reveal id="currency">
     <div class="section-heading">
      <div>
       <p class="eyebrow">MONEY FOR THE JOURNEY</p>
@@ -187,7 +125,7 @@
      </div>
     </div>
    </section>
-   <section class="recommendation-section">
+   <section class="recommendation-section" data-reveal>
     <div class="recommendation-card">
      <div class="recommendation-icon">
       ✦
@@ -203,7 +141,7 @@
      </div>
     </div>
    </section>
-   <footer>
+   <footer data-reveal>
     <span>
      GLOBAL TRIP GUIDE / WEATHER &amp; CURRENCY
     </span>

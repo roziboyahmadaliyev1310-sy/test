@@ -51,7 +51,7 @@ export const getWeatherByCity = (city, units = 'metric') => API_KEY !== 'YOUR_OP
     })]) :
     getOpenMeteoByCity(city, units);
 
-export const getWeatherByCoordinates = (latitude, longitude, units = 'metric') => API_KEY !== 'YOUR_OPENWEATHERMAP_API_KEY' ?
+export const getWeatherByCoordinates = (latitude, longitude, units = 'metric', place = {}) => API_KEY !== 'YOUR_OPENWEATHERMAP_API_KEY' ?
     Promise.all([request('weather', {
         lat: latitude,
         lon: longitude,
@@ -61,7 +61,7 @@ export const getWeatherByCoordinates = (latitude, longitude, units = 'metric') =
         lon: longitude,
         units
     })]) :
-    getOpenMeteoByCoordinates(latitude, longitude, units);
+    getOpenMeteoByCoordinates(latitude, longitude, units, place);
 
 export async function searchLocations(query) {
     const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=100&language=en&format=json`);
@@ -108,7 +108,7 @@ async function getOpenMeteoByCoordinates(latitude, longitude, units, place = {})
     const weather = {
         name: place.name || 'Your location',
         sys: {
-            country: place.country_code || ''
+            country: place.country || place.country_code || ''
         },
         weather: [currentCondition],
         main: {

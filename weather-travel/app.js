@@ -203,7 +203,7 @@ $('location-results').addEventListener('click', (event) => {
     };
     $('city-input').value = place.name;
     $('location-results').replaceChildren();
-    loadWeather(() => getWeatherByCoordinates(place.latitude, place.longitude, state.units));
+    loadWeather(() => getWeatherByCoordinates(place.latitude, place.longitude, state.units, place));
 });
 
 $('search-form').addEventListener('submit', (event) => {
@@ -212,7 +212,7 @@ $('search-form').addEventListener('submit', (event) => {
     if (!city) return;
     if (state.selectedLocation) {
         const { latitude, longitude } = state.selectedLocation;
-        loadWeather(() => getWeatherByCoordinates(latitude, longitude, state.units));
+        loadWeather(() => getWeatherByCoordinates(latitude, longitude, state.units, state.selectedLocation));
         return;
     }
     loadWeather(async () => {
@@ -223,7 +223,7 @@ $('search-form').addEventListener('submit', (event) => {
             latitude: place.latitude,
             longitude: place.longitude
         };
-        return getWeatherByCoordinates(place.latitude, place.longitude, state.units);
+        return getWeatherByCoordinates(place.latitude, place.longitude, state.units, place);
     });
 });
 $('currency-amount').addEventListener('input', updateCurrencyConversion);
@@ -261,3 +261,18 @@ if (navigator.geolocation) navigator.geolocation.getCurrentPosition(({
 });
 else $('status').textContent = 'Search a location to start planning your trip.';
 initializeCurrencyConverter();
+
+if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+        });
+    }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+    });
+    document.querySelectorAll('[data-reveal]').forEach((element) => revealObserver.observe(element));
+    document.body.classList.add('motion-ready');
+}
