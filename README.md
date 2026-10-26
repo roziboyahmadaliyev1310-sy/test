@@ -7,7 +7,7 @@ Four modular Vanilla JavaScript applications:
 - `media-library/` - TMDB movie search, Google Books search, detail modal, and a local saved list.
 - `trip-planner/` - live city or country search with nearby place suggestions and a seven-day itinerary.
 
-The trip planner gets country/capital data from [Countries](https://github.com/annexare/Countries), city coordinates from Open-Meteo, nearby place suggestions from Wikipedia (classified with Wikidata), and currency estimates from ExchangeRate-API. Country searches start in the country's capital. These services need an internet connection; place suggestions are nearby Wikipedia articles, not an official or guaranteed list of attractions.
+The trip planner gets country/capital data from [Countries](https://github.com/annexare/Countries), worldwide city coordinates and live city suggestions from Open-Meteo, named attraction coordinates and popular nearby place suggestions from Wikipedia (ranked with Wikidata sitelinks). Attraction lookup samples multiple nearby areas and searches landmark, museum, monument, park, temple, and related articles; the planner also exposes additional results beyond the seven-day itinerary. Country searches start in the country's capital; entering a city with its country (for example, `Paris, France`) disambiguates duplicate city names. These services need an internet connection; suggestions are based on available Wikipedia coverage and cannot guarantee every attraction or a definitive popularity ranking.
 
 ## Run
 

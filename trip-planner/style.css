@@ -249,6 +249,29 @@ header {
   letter-spacing: -0.05em;
 }
 
+.more-places {
+  margin: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.more-places summary {
+  padding: 15px 0;
+  color: var(--dark-green);
+  font: 600 14px 'Space Grotesk', sans-serif;
+  cursor: pointer;
+}
+
+.more-places ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 20px;
+  margin: 0;
+  padding: 0 0 18px 18px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .trip-details {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -405,6 +428,10 @@ footer {
 
   .day-cost {
     justify-self: start;
+  }
+
+  .more-places ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .live-forecast {
