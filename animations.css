@@ -81,9 +81,15 @@ html {
   transform: translateY(0);
 }
 
+.motion-ready [data-reveal]:focus-within {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .motion-ready .route-grid > [data-reveal],
 .motion-ready .budget > [data-reveal],
 .motion-ready .apps > [data-reveal],
+.motion-ready .info-grid > [data-reveal],
 .motion-ready .toolbox > [data-reveal] {
   transition-delay: var(--reveal-delay, 0ms);
 }

@@ -1,4 +1,5 @@
 const revealSelectors = [
+  '[data-reveal]',
   'main > .section',
   '.route-grid > *',
   '.budget > *',
@@ -10,18 +11,17 @@ const revealSelectors = [
   '.booking'
 ];
 
-const revealItems = document.querySelectorAll(revealSelectors.join(','));
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+  const revealItems = document.querySelectorAll(revealSelectors.join(','));
 
-revealItems.forEach((item) => {
-  item.dataset.reveal = '';
-  if (item.parentElement.matches('.route-grid, .budget, .apps, .toolbox')) {
-    const siblingIndex = Array.from(item.parentElement.children).indexOf(item);
-    item.style.setProperty('--reveal-delay', `${siblingIndex * 80}ms`);
-  }
-});
-
-if ('IntersectionObserver' in window) {
-  document.documentElement.classList.add('motion-ready');
+  revealItems.forEach((item) => {
+    item.dataset.reveal = '';
+    if (item.parentElement?.matches('.route-grid, .budget, .apps, .info-grid, .toolbox')) {
+      const siblingIndex = Array.from(item.parentElement.children).indexOf(item);
+      item.style.setProperty('--reveal-delay', `${Math.min(siblingIndex * 80, 400)}ms`);
+    }
+  });
 
   const observer = new IntersectionObserver((entries, currentObserver) => {
     entries.forEach((entry) => {
@@ -35,4 +35,5 @@ if ('IntersectionObserver' in window) {
   });
 
   revealItems.forEach((item) => observer.observe(item));
+  document.documentElement.classList.add('motion-ready');
 }
