@@ -103,7 +103,7 @@
       <h1 id="hero-title">A slower side<br/>of Kyoto.</h1>
       <p id="hero-description">Lantern-lit lanes, temple gardens, and mornings that invite you to wander.</p>
       <div class="hero-actions">
-       <a class="hero-link" id="hero-link" href="trip-planner/?destination=Kyoto%2C%20Japan">Explore Kyoto <span aria-hidden="true">↗</span></a>
+       <a class="hero-link" id="hero-link" href="trip-planner/index.html?destination=Kyoto%2C%20Japan">Explore Kyoto <span aria-hidden="true">↗</span></a>
        <span class="hero-count" id="hero-count">01 / 04</span>
       </div>
      </div>
@@ -132,19 +132,19 @@
      <p class="section-note">From big-city weekends to sunlit coastlines, find a place that feels like your kind of trip.</p>
     </div>
     <div class="destination-grid">
-     <a class="destination-card" href="trip-planner/?destination=Paris%2C%20France">
+     <a class="destination-card" href="trip-planner/index.html?destination=Paris%2C%20France">
       <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="" loading="lazy"/>
       <div class="destination-info"><small>FRANCE · CITY BREAK</small><h3>Paris <span aria-hidden="true">↗</span></h3><p>Museum afternoons and cafe mornings.</p></div>
      </a>
-     <a class="destination-card" href="trip-planner/?destination=Tokyo%2C%20Japan">
+     <a class="destination-card" href="trip-planner/index.html?destination=Tokyo%2C%20Japan">
       <img src="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="" loading="lazy"/>
       <div class="destination-info"><small>JAPAN · BIG CITY</small><h3>Tokyo <span aria-hidden="true">↗</span></h3><p>Neon nights, quiet shrines, endless neighborhoods.</p></div>
      </a>
-     <a class="destination-card" href="trip-planner/?destination=Istanbul%2C%20Turkey">
+     <a class="destination-card" href="trip-planner/index.html?destination=Istanbul%2C%20Turkey">
       <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="" loading="lazy"/>
       <div class="destination-info"><small>TURKEY · CULTURE</small><h3>Istanbul <span aria-hidden="true">↗</span></h3><p>Crossroads of flavors, history, and waterways.</p></div>
      </a>
-     <a class="destination-card" href="trip-planner/?destination=Bali%2C%20Indonesia">
+     <a class="destination-card" href="trip-planner/index.html?destination=Bali%2C%20Indonesia">
       <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="" loading="lazy"/>
       <div class="destination-info"><small>INDONESIA · ISLAND ESCAPE</small><h3>Bali <span aria-hidden="true">↗</span></h3><p>Green rice terraces and an easy island rhythm.</p></div>
      </a>
@@ -205,7 +205,7 @@
      eyebrow.textContent = slide.region;
      title.innerHTML = slide.title;
      description.textContent = slide.description;
-     destinationLink.href = `trip-planner/?destination=${encodeURIComponent(slide.destination)}`;
+     destinationLink.href = `trip-planner/index.html?destination=${encodeURIComponent(slide.destination)}`;
      destinationLink.innerHTML = `Explore ${slide.destination.split(',')[0]} <span aria-hidden="true">↗</span>`;
      count.textContent = `${String(activeSlide + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
      dots.querySelectorAll('button').forEach((dot, dotIndex) => {
@@ -241,7 +241,7 @@
     event.preventDefault();
     const destination = document.getElementById('destination-query').value.trim();
     if (!destination) return;
-    window.location.href = `trip-planner/?destination=${encodeURIComponent(destination)}`;
+    window.location.href = `trip-planner/index.html?destination=${encodeURIComponent(destination)}`;
    });
   </script>
  </body>
