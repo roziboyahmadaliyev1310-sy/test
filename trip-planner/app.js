@@ -200,7 +200,11 @@ plannerForm.addEventListener('submit', async (event) => {
     }
 });
 
-if (saved && Array.isArray(saved.itinerary)) {
+const requestedDestination = new URLSearchParams(window.location.search).get('destination');
+if (requestedDestination?.trim()) {
+    $('destination').value = requestedDestination.trim();
+    plannerForm.requestSubmit();
+} else if (saved && Array.isArray(saved.itinerary)) {
     $('destination').value = saved.query || saved.name;
     render(saved);
 }
