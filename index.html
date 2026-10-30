@@ -3,537 +3,179 @@
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Seoul to Sea / Korea Trip Guide
-  </title>
+  <meta name="description" content="Plan trips around the world with destination research, local weather, currency tools, and travel inspiration."/>
+  <title>API Atlas / Global Travel Tools</title>
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
   <style>
-   *{box-sizing:border-box} :root{--ink:#182522;--muted:#718079;--paper:#f5f1e9;--line:#d9ded7;--sea:#b9d9d4;--coral:#e9785e;--sun:#f0cf72;--night:#1d3b3b} body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif}.hub{max-width:1220px;margin:auto;padding:26px 5vw 34px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:20px}.logo{font:700 19px 'Space Grotesk';letter-spacing:.02em}.logo span{color:var(--coral)}.tag{font-size:10px;letter-spacing:.15em;color:var(--muted)}.hero{min-height:590px;padding:76px 0 70px;display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:end}.hero-copy{align-self:center}.eyebrow{font-size:10px;letter-spacing:.16em;color:var(--coral);font-weight:700;margin:0 0 15px}.hero h1{font:600 clamp(58px,8.5vw,112px)/.86 'Space Grotesk';letter-spacing:-.07em;margin:0 0 25px}.hero h1 em{font-style:normal;color:#487d79}.hero-copy>p:last-child{color:var(--muted);font-size:17px;line-height:1.6;max-width:425px}.hero-visual{min-height:480px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;color:white;background:linear-gradient(180deg,rgba(22,49,48,.03),rgba(22,49,48,.8)),url('https://images.unsplash.com/photo-1538485399081-7c897f7b3e2f?auto=format&fit=crop&w=1200&q=85') center/cover;position:relative;overflow:hidden}.hero-visual:after{content:'SEOUL';position:absolute;right:-14px;bottom:66px;font:700 90px/.8 'Space Grotesk';letter-spacing:-.08em;color:#ffffff25;transform:rotate(-90deg);transform-origin:bottom right}.visual-top,.visual-bottom{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:start}.visual-top span,.visual-bottom span{font-size:10px;letter-spacing:.13em}.visual-bottom{align-items:end}.visual-bottom h2{font:600 34px/1 'Space Grotesk';margin:0 0 8px}.visual-bottom p{font-size:12px;margin:0;color:#d6e5df}.visual-bottom a{color:white;background:var(--coral);padding:13px 16px;text-decoration:none;font:600 12px 'Space Grotesk'}.section{border-top:1px solid var(--line);padding:32px 0 0;margin-top:10px}.section-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:26px}.section-heading h2{font:600 34px 'Space Grotesk';margin:0}.section-note{color:var(--muted);font-size:13px;max-width:310px;line-height:1.5}.route-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.route{min-height:280px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;color:var(--ink);background:var(--sea);transition:transform .25s}.route:hover{transform:translateY(-5px)}.route:nth-child(2){background:var(--sun)}.route:nth-child(3){background:#d8e4df}.route:nth-child(4){background:#e9b7a0}.route small{font:700 10px 'Space Grotesk';letter-spacing:.12em}.route h3{font:600 26px/1 'Space Grotesk';margin:12px 0 8px}.route p{color:#4e6660;font-size:12px;line-height:1.5;margin:0}.route strong{font:600 13px 'Space Grotesk'}.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.info-panel{background:var(--night);color:white;padding:30px}.info-panel.light{background:#e9e2d3;color:var(--ink)}.info-panel h3{font:600 27px 'Space Grotesk';margin:0 0 22px}.info-panel p{color:#afc6bf;font-size:13px;line-height:1.6}.light p{color:var(--muted)}.app-links{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.app-link{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #4c6864;padding:13px 0;color:white;text-decoration:none;font-size:13px}.app-link span{color:var(--sea);font-size:11px}.light .app-link{border-color:#c5c4b9;color:var(--ink)}.light .app-link span{color:var(--coral)}.budget{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.budget-card{padding:23px;background:#fffdf8;border-top:4px solid var(--coral)}.budget-card:nth-child(2){border-color:var(--sun)}.budget-card:nth-child(3){border-color:var(--sea)}.budget-card small{font:700 10px 'Space Grotesk';letter-spacing:.12em;color:var(--muted)}.budget-card strong{display:block;font:600 29px 'Space Grotesk';margin:15px 0 7px}.budget-card p{font-size:12px;color:var(--muted);line-height:1.5;margin:0}.booking{display:flex;justify-content:space-between;align-items:center;gap:30px;background:var(--coral);color:white;padding:27px 30px}.booking h2{font:600 28px 'Space Grotesk';margin:0 0 8px}.booking p{font-size:13px;margin:0;color:#ffe8de}.booking-links{display:flex;gap:9px;flex-wrap:wrap}.booking-links a{background:white;color:var(--ink);padding:12px 14px;text-decoration:none;font:600 11px 'Space Grotesk'}.apps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.app{min-height:235px;padding:25px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;color:var(--ink);transition:transform .25s}.app:hover{transform:translateY(-5px)}.app:nth-child(1){background:var(--sea)}.app:nth-child(2){background:var(--sun)}.app:nth-child(3){background:#d8e4df}.app small{font:700 10px 'Space Grotesk';letter-spacing:.12em}.app h2{font:600 26px/1 'Space Grotesk';margin:20px 0 0}.app p{font-size:12px;color:#60716a;line-height:1.5}.arrow{font-size:26px;align-self:end;color:var(--coral)}footer{margin-top:70px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;letter-spacing:.1em;display:flex;justify-content:space-between}@media(max-width:780px){.hub{padding:18px 22px}.tag{display:none}.hero{grid-template-columns:1fr;padding:58px 0 50px;gap:35px;min-height:auto}.hero-visual{min-height:410px}.route-grid,.budget{grid-template-columns:repeat(2,1fr)}.info-grid{grid-template-columns:1fr}.booking{display:block}.booking-links{margin-top:20px}.apps{grid-template-columns:1fr}.app{min-height:180px}.section-heading{display:block}.section-note{margin-top:12px}footer{gap:15px;line-height:1.5}}@media(max-width:480px){.route-grid,.budget{grid-template-columns:1fr}.hero-visual{min-height:370px;padding:20px}.visual-bottom{display:block}.visual-bottom a{display:inline-block;margin-top:20px}.hero-visual:after{font-size:70px}}
-   .interactive-section{scroll-margin-top:24px}.trip-form{background:#fffdf8;padding:24px;border:1px solid var(--line)}.trip-form fieldset{border:0;padding:0;margin:0 0 20px}.trip-form legend,.trip-form label{font:600 13px 'Space Grotesk'}.stop-options{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:12px}.stop-option{display:flex;align-items:center;gap:9px;background:#f5f1e9;padding:12px;cursor:pointer}.stop-option input{accent-color:#487d79;width:17px;height:17px}.trip-settings{display:flex;gap:16px;align-items:end;flex-wrap:wrap}.trip-settings label{display:grid;gap:7px;color:var(--muted)}.trip-settings select,.trip-form button,.game-next,.clear-trip{min-height:43px;padding:0 14px;border:1px solid var(--line);background:white;color:var(--ink);font:600 13px 'Space Grotesk'}.trip-form button,.game-next,.clear-trip{border:0;background:var(--night);color:white;cursor:pointer}.trip-result{margin-top:15px}.trip-result:empty{display:none}.trip-result-card{padding:22px;background:#e4efe7}.trip-result-card h3{font:600 22px 'Space Grotesk';margin:0 0 8px}.trip-result-card>p{color:var(--muted);font-size:13px;line-height:1.5}.generated-days{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:18px 0}.generated-day{background:#fffdf8;padding:14px}.generated-day small{color:var(--coral);font:700 10px 'Space Grotesk';letter-spacing:.1em}.generated-day strong{display:block;margin:7px 0;font:600 15px 'Space Grotesk'}.generated-day p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}.game-card{background:var(--night);color:white;padding:28px}.game-top{display:flex;justify-content:space-between;gap:16px;color:var(--sea);font:700 10px 'Space Grotesk';letter-spacing:.12em}.game-card h3{font:600 26px/1.2 'Space Grotesk';margin:30px 0 20px}.game-options{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.game-option{min-height:48px;padding:12px;text-align:left;background:#294b49;color:white;border:1px solid #4c6864;font:500 13px 'DM Sans';cursor:pointer}.game-option:hover,.game-option:focus-visible{border-color:var(--sun)}.game-option[aria-pressed="true"]{background:#487d79;border-color:var(--sea)}.game-option:disabled{cursor:default;opacity:.8}.game-option.is-correct{background:#346744;border-color:#93d6a4;opacity:1}.game-option.is-wrong{background:#7a4438;border-color:#e9785e;opacity:1}.game-feedback{min-height:24px;color:#d6e5df;font-size:13px;line-height:1.5}.game-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.game-next{background:var(--coral)}.toolbox{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.toolbox a{padding:16px;background:#fffdf8;border-top:3px solid var(--sea);color:var(--ink);text-decoration:none;font:600 14px 'Space Grotesk'}.toolbox a span{display:block;margin-top:7px;color:var(--muted);font:400 11px 'DM Sans'}.toolbox a:hover{border-color:var(--coral)}@media(max-width:780px){.stop-options,.toolbox{grid-template-columns:repeat(2,1fr)}}@media(max-width:480px){.stop-options,.generated-days,.game-options,.toolbox{grid-template-columns:1fr}.trip-settings{align-items:stretch}.trip-settings label,.trip-settings select,.trip-form button{width:100%}}
+   *{box-sizing:border-box}
+   :root{--ink:#182522;--muted:#718079;--paper:#f5f1e9;--line:#d9ded7;--sea:#b9d9d4;--coral:#e9785e;--sun:#f0cf72;--night:#1d3b3b}
+   body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif}
+   .hub{max-width:1220px;margin:auto;padding:26px 5vw 34px}
+   .top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:20px}
+   .logo{font:700 19px 'Space Grotesk';letter-spacing:.02em;color:var(--ink);text-decoration:none}
+   .logo span{color:var(--coral)}
+   .tag{font-size:10px;letter-spacing:.15em;color:var(--muted)}
+   .hero{min-height:570px;padding:76px 0 70px;display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:center}
+   .hero-copy{align-self:center}
+   .eyebrow{font-size:10px;letter-spacing:.16em;color:var(--coral);font-weight:700;margin:0 0 15px}
+   .hero h1{font:600 clamp(58px,8.5vw,112px)/.86 'Space Grotesk';letter-spacing:-.07em;margin:0 0 25px}
+   .hero h1 em{font-style:normal;color:#487d79}
+   .hero-copy>p:last-of-type{color:var(--muted);font-size:17px;line-height:1.6;max-width:440px}
+   .primary-link{display:inline-flex;align-items:center;gap:18px;margin-top:12px;padding:15px 18px;background:var(--night);color:white;text-decoration:none;font:600 13px 'Space Grotesk'}
+   .primary-link:hover{background:#487d79}
+   .hero-visual{min-height:470px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;color:white;background:radial-gradient(ellipse at 70% 22%,#f0cf72 0 9%,transparent 9.5%),linear-gradient(145deg,#8ebdb2 0 34%,#487d79 34% 64%,#1d3b3b 64%);position:relative;overflow:hidden}
+   .hero-visual:before,.hero-visual:after{content:"";position:absolute;left:-10%;width:125%;height:34%;border-radius:50%;background:#c9e0d5;transform:rotate(-12deg)}
+   .hero-visual:before{bottom:22%;opacity:.8}
+   .hero-visual:after{bottom:7%;background:#b9d9d4;opacity:.85}
+   .visual-top,.visual-bottom{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:start}
+   .visual-top span,.visual-bottom span{font-size:10px;letter-spacing:.13em}
+   .visual-bottom{align-items:end}
+   .visual-bottom h2{font:600 34px/1 'Space Grotesk';margin:0 0 8px}
+   .visual-bottom p{font-size:12px;margin:0;color:#e3efea}
+   .visual-bottom a{color:var(--ink);background:white;padding:13px 16px;text-decoration:none;font:600 12px 'Space Grotesk'}
+   .section{border-top:1px solid var(--line);padding:32px 0 0;margin-top:10px}
+   .section-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:26px}
+   .section-heading h2{font:600 34px 'Space Grotesk';margin:0}
+   .section-note{color:var(--muted);font-size:13px;max-width:360px;line-height:1.5}
+   .apps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+   .app{min-height:245px;padding:25px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;color:var(--ink);transition:transform .25s}
+   .app:hover{transform:translateY(-5px)}
+   .app:nth-child(1){background:var(--sea)}
+   .app:nth-child(2){background:var(--sun)}
+   .app:nth-child(3){background:#d8e4df}
+   .app:nth-child(4){background:#e9b7a0}
+   .app small{font:700 10px 'Space Grotesk';letter-spacing:.12em}
+   .app h3{font:600 25px/1 'Space Grotesk';margin:22px 0 10px}
+   .app p{font-size:12px;color:#526a63;line-height:1.55;margin:0}
+   .arrow{font-size:26px;align-self:end;color:var(--coral)}
+   .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+   .feature{min-height:190px;padding:24px;background:#fffdf8}
+   .feature small{font:700 10px 'Space Grotesk';letter-spacing:.12em;color:var(--coral)}
+   .feature h3{font:600 22px 'Space Grotesk';margin:18px 0 9px}
+   .feature p{color:var(--muted);font-size:13px;line-height:1.6;margin:0}
+   .booking{display:flex;justify-content:space-between;align-items:center;gap:30px;background:var(--night);color:white;padding:30px}
+   .booking h2{font:600 28px 'Space Grotesk';margin:0 0 8px}
+   .booking p{font-size:13px;margin:0;color:#c5d8d1;line-height:1.6}
+   .booking .primary-link{margin:0;background:var(--coral);white-space:nowrap}
+   footer{margin-top:70px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;letter-spacing:.1em;display:flex;justify-content:space-between}
+   @media(max-width:900px){.apps{grid-template-columns:repeat(2,1fr)}}
+   @media(max-width:780px){.hub{padding:18px 22px}.tag{display:none}.hero{grid-template-columns:1fr;padding:58px 0 50px;gap:35px;min-height:auto}.hero-visual{min-height:410px}.feature-grid{grid-template-columns:1fr}.booking{display:block}.booking .primary-link{margin-top:20px}.section-heading{display:block}.section-note{margin-top:12px}footer{gap:15px;line-height:1.5}}
+   @media(max-width:480px){.apps{grid-template-columns:1fr}.hero-visual{min-height:370px;padding:20px}.visual-bottom{display:block}.visual-bottom a{display:inline-block;margin-top:20px}.hero h1{font-size:clamp(54px,16vw,76px)}}
+   @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
   </style>
-   <link href="animations.css" rel="stylesheet"/>
  </head>
  <body>
   <main class="hub">
    <header class="top">
-    <div class="logo">
-     SEOUL
-     <span>
-      TO SEA
-     </span>
-    </div>
-    <div class="tag">
-     A FIELD GUIDE TO SOUTH KOREA / 2026
-    </div>
+    <a class="logo" href="./">API <span>ATLAS</span></a>
+    <span class="tag">TRAVEL TOOLS FOR EVERYWHERE</span>
    </header>
    <section class="hero">
     <div class="hero-copy">
-     <p class="eyebrow">
-      SOUTH KOREA / START HERE
-     </p>
-     <h1>
-      Find your
-      <br/>
-      <em>
-       next scene.
-      </em>
-     </h1>
-     <p>
-      One practical starting point for a first trip through South Korea: famous places, useful routes, honest costs, and the small tools that make moving around easier.
-     </p>
+     <p class="eyebrow">GO FURTHER, PLAN SMARTER</p>
+     <h1>Find your<br/><em>next destination.</em></h1>
+     <p>One place to explore destinations, map out your days, check local weather, and get ready for the journey ahead.</p>
+     <a class="primary-link" href="trip-planner/">Plan a trip anywhere <span aria-hidden="true">↗</span></a>
     </div>
-    <div class="hero-visual">
+    <div class="hero-visual" aria-hidden="true">
      <div class="visual-top">
-      <span>
-       01 / FEATURED PLACE
-      </span>
-      <span>
-       37.5665° N
-      </span>
+      <span>YOUR NEXT JOURNEY</span>
+      <span>ANYWHERE / WORLDWIDE</span>
      </div>
      <div class="visual-bottom">
       <div>
-       <h2>
-        Seoul
-       </h2>
-       <p>
-        Palaces, late-night markets, quiet tea houses.
-       </p>
+       <h2>Out there.</h2>
+       <p>New places, made easier to explore.</p>
       </div>
-      <a href="https://english.visitseoul.net/" rel="noreferrer" target="_blank">
-       Explore the city ↗
-      </a>
+      <a href="trip-planner/">Start planning ↗</a>
      </div>
     </div>
    </section>
    <section class="section">
     <div class="section-heading">
      <div>
-      <p class="eyebrow">
-       THE FIRST ROUTE
-      </p>
-      <h2>
-       Four places worth the trip
-      </h2>
+      <p class="eyebrow">YOUR TRAVEL TOOLKIT</p>
+      <h2>Plan the whole journey.</h2>
      </div>
-     <p class="section-note">
-      A balanced 10-day loop from city energy to island air. Choose two or three bases and leave room for wandering.
-     </p>
+     <p class="section-note">Start with any city or country, then use practical tools to prepare for wherever you are going.</p>
     </div>
-    <div class="route-grid">
-     <a class="route" href="https://english.visitseoul.net/" rel="noreferrer" target="_blank">
+    <div class="apps">
+     <a class="app" href="trip-planner/">
       <div>
-       <small>
-        01 / CITY
-       </small>
-       <h3>
-        Seoul
-       </h3>
-       <p>
-        Gyeongbokgung, Bukchon, Hongdae, Namsan Tower and the food alleys of Gwangjang Market.
-       </p>
+       <small>01 / DESTINATIONS</small>
+       <h3>Build your trip.</h3>
+       <p>Explore cities worldwide and shape a seven-day plan around places to see.</p>
       </div>
-      <strong>
-       3–4 days ↗
-      </strong>
+      <span class="arrow" aria-hidden="true">↗</span>
      </a>
-     <a class="route" href="https://english.visitbusan.net/" rel="noreferrer" target="_blank">
+     <a class="app" href="weather-travel/">
       <div>
-       <small>
-        02 / COAST
-       </small>
-       <h3>
-        Busan
-       </h3>
-       <p>
-        Haedong Yonggungsa, Gamcheon Culture Village, Haeundae Beach and fresh seafood.
-       </p>
+       <small>02 / LOCAL WEATHER</small>
+       <h3>Pack for the place.</h3>
+       <p>Check conditions and forecasts for destinations around the world.</p>
       </div>
-      <strong>
-       2–3 days ↗
-      </strong>
+      <span class="arrow" aria-hidden="true">↗</span>
      </a>
-     <a class="route" href="https://english.visitkorea.or.kr/enu/ATR/SI_ENG_2_1_1.jsp?cid=264184" rel="noreferrer" target="_blank">
+     <a class="app" href="currency-converter/">
       <div>
-       <small>
-        03 / HISTORY
-       </small>
-       <h3>
-        Gyeongju
-       </h3>
-       <p>
-        Ancient tombs, Bulguksa Temple and a slower look at Korea's Silla-era history.
-       </p>
+       <small>03 / TRAVEL MONEY</small>
+       <h3>Know your budget.</h3>
+       <p>Convert currencies and compare amounts before you spend.</p>
       </div>
-      <strong>
-       1–2 days ↗
-      </strong>
+      <span class="arrow" aria-hidden="true">↗</span>
      </a>
-     <a class="route" href="https://www.visitjeju.net/en" rel="noreferrer" target="_blank">
+     <a class="app" href="media-library/">
       <div>
-       <small>
-        04 / ISLAND
-       </small>
-       <h3>
-        Jeju
-       </h3>
-       <p>
-        Hallasan trails, black-lava coastlines, waterfalls and a reset after the big cities.
-       </p>
+       <small>04 / INSPIRATION</small>
+       <h3>Take a story along.</h3>
+       <p>Find books and films to bring a little more context to your trip.</p>
       </div>
-      <strong>
-       2–3 days ↗
-      </strong>
+      <span class="arrow" aria-hidden="true">↗</span>
      </a>
-    </div>
-   </section>
-   <section class="section interactive-section" id="trip-builder">
-    <div class="section-heading">
-     <div>
-      <p class="eyebrow">MAKE IT YOURS</p>
-      <h2>Build a Korea route</h2>
-     </div>
-     <p class="section-note">Pick your stops and pace for a day-by-day outline. Your latest plan is saved on this device.</p>
-    </div>
-    <form class="trip-form" id="trip-form">
-     <fieldset>
-      <legend>Choose the places you want to visit</legend>
-      <div class="stop-options">
-       <label class="stop-option"><input type="checkbox" name="stop" value="Seoul" checked/> Seoul</label>
-       <label class="stop-option"><input type="checkbox" name="stop" value="Busan" checked/> Busan</label>
-       <label class="stop-option"><input type="checkbox" name="stop" value="Gyeongju"/> Gyeongju</label>
-       <label class="stop-option"><input type="checkbox" name="stop" value="Jeju"/> Jeju</label>
-      </div>
-     </fieldset>
-     <div class="trip-settings">
-      <label for="trip-days">Trip length
-       <select id="trip-days" name="days">
-        <option value="3">3 days</option>
-        <option value="5">5 days</option>
-        <option value="7" selected>7 days</option>
-        <option value="10">10 days</option>
-        <option value="14">14 days</option>
-       </select>
-      </label>
-      <label for="trip-pace">Daily budget
-       <select id="trip-pace" name="pace">
-        <option value="smart">Smart / $55 a day</option>
-        <option value="comfort" selected>Comfort / $125 a day</option>
-        <option value="slow">Slow / $230 a day</option>
-       </select>
-      </label>
-      <button type="submit">Build my route ↗</button>
-     </div>
-    </form>
-    <div class="trip-result" id="trip-result" aria-live="polite"></div>
-   </section>
-   <section class="section interactive-section" id="travel-game">
-    <div class="section-heading">
-     <div>
-      <p class="eyebrow">A QUICK DETOUR</p>
-      <h2>How well do you know Korea?</h2>
-     </div>
-     <p class="section-note">Answer five quick questions about the places, food, and travel basics. Your best score stays on this device.</p>
-    </div>
-    <div class="game-card">
-     <div class="game-top"><span id="game-progress">QUESTION 1 / 5</span><span id="game-best">BEST 0 / 5</span></div>
-     <h3 id="game-question"></h3>
-     <div class="game-options" id="game-options" role="group" aria-label="Answer choices"></div>
-     <p class="game-feedback" id="game-feedback" aria-live="polite"></p>
-     <div class="game-actions"><button class="game-next" id="game-next" type="button" hidden>Next question</button></div>
     </div>
    </section>
    <section class="section">
     <div class="section-heading">
      <div>
-      <p class="eyebrow">USEFUL TRIP TOOLS</p>
-      <h2>Do the practical bits</h2>
+      <p class="eyebrow">A GOOD PLACE TO BEGIN</p>
+      <h2>Make room for the details.</h2>
      </div>
-     <p class="section-note">Open the working tools for weather, currency, and things to read or watch on the journey.</p>
+     <p class="section-note">Every destination is different. Build a plan that starts with your chosen place, not a one-size-fits-all route.</p>
     </div>
-    <nav class="toolbox" aria-label="Travel tools">
-     <a href="trip-planner/">Trip planner<span>Live forecast and daily plan ↗</span></a>
-     <a href="weather-travel/">Weather<span>Check conditions for your trip ↗</span></a>
-     <a href="currency-converter/">Currency<span>Convert your travel budget ↗</span></a>
-     <a href="media-library/">Media library<span>Find and save books or films ↗</span></a>
-    </nav>
-   </section>
-   <section class="section">
-    <div class="info-grid">
-     <div class="info-panel">
-      <p class="eyebrow">
-       MOVE WITH LESS FRICTION
-      </p>
-      <h3>
-       Apps worth downloading
-      </h3>
-      <p>
-       Install these before landing. They cover navigation, translation, transit and reservations when Google Maps is not enough.
-      </p>
-      <div class="app-links">
-       <a class="app-link" href="https://map.naver.com/" rel="noreferrer" target="_blank">
-        Naver Map
-        <span>
-         maps ↗
-        </span>
-       </a>
-       <a class="app-link" href="https://map.kakao.com/" rel="noreferrer" target="_blank">
-        KakaoMap
-        <span>
-         local routes ↗
-        </span>
-       </a>
-       <a class="app-link" href="https://papago.naver.com/" rel="noreferrer" target="_blank">
-        Papago
-        <span>
-         translation ↗
-        </span>
-       </a>
-       <a class="app-link" href="https://www.k-eta.go.kr/" rel="noreferrer" target="_blank">
-        K-ETA
-        <span>
-         entry check ↗
-        </span>
-       </a>
-      </div>
-     </div>
-     <div class="info-panel light">
-      <p class="eyebrow">
-       A SIMPLE 10-DAY PLAN
-      </p>
-      <h3>
-       How to shape the trip
-      </h3>
-      <p>
-       Start in Seoul, take the KTX south to Busan, pause in historic Gyeongju, then finish with a flight to Jeju. Book long-distance trains and Jeju stays early in busy seasons.
-      </p>
-      <div class="app-links">
-       <a class="app-link" href="trip-planner/">
-        Open the trip planner
-        <span>
-         tool ↗
-        </span>
-       </a>
-       <a class="app-link" href="weather-travel/">
-        Check the forecast
-        <span>
-         tool ↗
-        </span>
-       </a>
-      </div>
-     </div>
-    </div>
-   </section>
-   <section class="section">
-    <div class="section-heading">
-     <div>
-      <p class="eyebrow">
-       PLAN THE MONEY
-      </p>
-      <h2>
-       What might 10 days cost?
-      </h2>
-     </div>
-     <p class="section-note">
-      Approximate per-person ranges in USD, excluding international flights. Your pace and season will move the number.
-     </p>
-    </div>
-    <div class="budget">
-     <div class="budget-card">
-      <small>
-       SMART / HOSTELS
-      </small>
-      <strong>
-       $650–950
-      </strong>
-      <p>
-       Guesthouses, local meals, transit, markets and a few paid attractions.
-      </p>
-     </div>
-     <div class="budget-card">
-      <small>
-       COMFORT / 3-STAR
-      </small>
-      <strong>
-       $1,200–1,900
-      </strong>
-      <p>
-       Private rooms, a mix of restaurants, KTX between cities and guided moments.
-      </p>
-     </div>
-     <div class="budget-card">
-      <small>
-       SLOW / BOUTIQUE
-      </small>
-      <strong>
-       $2,300+
-      </strong>
-      <p>
-       Design hotels, taxis, tasting menus, day tours and more flexible transport.
-      </p>
-     </div>
+    <div class="feature-grid">
+     <article class="feature">
+      <small>01 / FIND YOUR BASE</small>
+      <h3>Choose a city or country.</h3>
+      <p>Search for a destination anywhere in the world and discover places to start exploring.</p>
+     </article>
+     <article class="feature">
+      <small>02 / CHECK BEFORE YOU GO</small>
+      <h3>Prepare for local conditions.</h3>
+      <p>Review the forecast, think about the season, and check local transport and entry guidance.</p>
+     </article>
+     <article class="feature">
+      <small>03 / KEEP PLANS FLEXIBLE</small>
+      <h3>Make the route your own.</h3>
+      <p>Use estimates as a starting point, leave room to wander, and confirm details with local sources.</p>
+     </article>
     </div>
    </section>
    <section class="section">
     <div class="booking">
      <div>
-      <h2>
-       Book the first night.
-      </h2>
-      <p>
-       Compare stays in Seoul before you arrive, then let the rest of the route unfold.
-      </p>
+      <h2>Where will you go next?</h2>
+      <p>Enter a city or country to get a destination guide with places to visit, weather, local costs, and hotel links.</p>
      </div>
-     <div class="booking-links">
-      <a href="https://www.booking.com/city/kr/seoul.html" rel="noreferrer" target="_blank">
-       Booking.com ↗
-      </a>
-      <a href="https://www.agoda.com/city/seoul-kr.html" rel="noreferrer" target="_blank">
-       Agoda ↗
-      </a>
-      <a href="https://www.google.com/travel/hotels/Seoul" rel="noreferrer" target="_blank">
-       Google Hotels ↗
-      </a>
-     </div>
+     <a class="primary-link" href="trip-planner/">Explore destinations worldwide <span aria-hidden="true">↗</span></a>
     </div>
-   </section>
-   <section class="section">
-    <div class="section-heading">
-     <div>
-      <p class="eyebrow">
-       START YOUR TRIP
-      </p>
-      <h2>
-       Where do you want to go?
-      </h2>
-     </div>
-     <p class="section-note">
-      Choose one destination and get the important details together: weather, places to visit, a day-by-day route, and how much money to prepare.
-     </p>
-    </div>
-    <a class="app single-tool" href="trip-planner/">
-     <div>
-      <small>
-       ONE PLACE / COMPLETE TRIP PLAN
-      </small>
-      <h2>
-       Enter your
-       <br/>
-       destination.
-      </h2>
-      <p>
-       Start with Seoul, Busan, Jeju, or any city you want to explore. Your plan will show the route and estimated spending in one place.
-      </p>
-     </div>
-     <span class="arrow">
-      ↗
-     </span>
-    </a>
    </section>
    <footer>
-    <span>
-     SEOUL TO SEA / SOUTH KOREA FIELD GUIDE
-    </span>
-    <span>
-     LINKS OPEN IN A NEW TAB / ESTIMATES ARE GUIDES
-    </span>
+    <span>API ATLAS / GLOBAL TRAVEL TOOLS</span>
+    <span>ESTIMATES ARE GUIDES / CHECK LOCAL INFORMATION</span>
    </footer>
   </main>
-  <script>
-   const stopDetails = {
-    Seoul: 'Gyeongbokgung Palace and a lively market evening',
-    Busan: 'Gamcheon Culture Village and the coast at Haeundae',
-    Gyeongju: 'Bulguksa Temple and the ancient tomb park',
-    Jeju: 'A volcanic coastline and a waterfall walk'
-   };
-   const paceBudgets = { smart: 55, comfort: 125, slow: 230 };
-   const tripForm = document.getElementById('trip-form');
-   const tripResult = document.getElementById('trip-result');
-
-   function renderTrip(plan) {
-    const stops = plan.stops;
-    const days = Array.from({ length: plan.days }, (_, dayIndex) => {
-     const dayStops = plan.days < stops.length
-      ? stops.filter((_, stopIndex) => Math.floor(stopIndex * plan.days / stops.length) === dayIndex)
-      : [stops[Math.min(stops.length - 1, Math.floor(dayIndex * stops.length / plan.days))]];
-     return `<article class="generated-day"><small>DAY ${String(dayIndex + 1).padStart(2, '0')}</small><strong>${dayStops.join(' + ')}</strong><p>${dayStops.map((stop) => stopDetails[stop]).join(' · ')}</p></article>`;
-    }).join('');
-    const total = plan.days * paceBudgets[plan.pace];
-    tripResult.innerHTML = `<div class="trip-result-card"><h3>Your ${plan.days}-day Korea outline</h3><p>${stops.join(' → ')} · about $${total.toLocaleString()} per person for meals, local transport, and activities. Flights and accommodation are not included.</p><div class="generated-days">${days}</div><button class="clear-trip" id="clear-trip" type="button">Clear saved route</button></div>`;
-    document.getElementById('clear-trip').addEventListener('click', () => {
-     localStorage.removeItem('korea-field-guide-plan-v1');
-     tripResult.innerHTML = '';
-    });
-   }
-
-   tripForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const stops = Array.from(tripForm.querySelectorAll('input[name="stop"]:checked'), (input) => input.value);
-    if (!stops.length) {
-     tripResult.innerHTML = '<p role="alert">Choose at least one place to build your route.</p>';
-     return;
-    }
-    const plan = {
-     stops,
-     days: Number(tripForm.elements.days.value),
-     pace: tripForm.elements.pace.value
-    };
-    localStorage.setItem('korea-field-guide-plan-v1', JSON.stringify(plan));
-    renderTrip(plan);
-   });
-
-   const savedTrip = localStorage.getItem('korea-field-guide-plan-v1');
-   if (savedTrip) {
-    const plan = JSON.parse(savedTrip);
-    if (Array.isArray(plan.stops) && plan.stops.length && plan.stops.every((stop) => Object.hasOwn(stopDetails, stop))
-     && [3, 5, 7, 10, 14].includes(plan.days) && Object.hasOwn(paceBudgets, plan.pace)) {
-     tripForm.querySelectorAll('input[name="stop"]').forEach((input) => {
-      input.checked = plan.stops.includes(input.value);
-     });
-     tripForm.elements.days.value = String(plan.days);
-     tripForm.elements.pace.value = plan.pace;
-     renderTrip(plan);
-    }
-   }
-
-   const questions = [
-    { question: 'Which city is the capital of South Korea?', options: ['Busan', 'Seoul', 'Jeju City', 'Incheon'], answer: 1, note: 'Seoul is South Korea’s capital and largest city.' },
-    { question: 'Which destination is a volcanic island known for Hallasan?', options: ['Jeju', 'Gyeongju', 'Suwon', 'Daegu'], answer: 0, note: 'Jeju is a volcanic island; Hallasan is South Korea’s highest mountain.' },
-    { question: 'What is the name of South Korea’s high-speed rail service?', options: ['Shinkansen', 'TGV', 'KTX', 'AVE'], answer: 2, note: 'KTX trains connect Seoul with cities including Busan.' },
-    { question: 'What is bibimbap?', options: ['A rice dish with mixed toppings', 'A sweet rice drink', 'A noodle soup', 'A savory pancake'], answer: 0, note: 'Bibimbap combines rice with vegetables and other toppings.' },
-    { question: 'N Seoul Tower overlooks which city?', options: ['Busan', 'Seoul', 'Jeonju', 'Daejeon'], answer: 1, note: 'The tower sits on Namsan in central Seoul.' }
-   ];
-   const gameQuestion = document.getElementById('game-question');
-   const gameOptions = document.getElementById('game-options');
-   const gameFeedback = document.getElementById('game-feedback');
-   const gameProgress = document.getElementById('game-progress');
-   const gameBest = document.getElementById('game-best');
-   const gameNext = document.getElementById('game-next');
-   let questionIndex = 0;
-   let score = 0;
-   let answered = false;
-   let complete = false;
-   let bestScore = Number(localStorage.getItem('korea-travel-quiz-best') || 0);
-   gameBest.textContent = `BEST ${bestScore} / ${questions.length}`;
-
-   function showQuestion() {
-    const item = questions[questionIndex];
-    answered = false;
-    gameProgress.textContent = `QUESTION ${questionIndex + 1} / ${questions.length}`;
-    gameQuestion.textContent = item.question;
-    gameOptions.innerHTML = item.options.map((option, index) =>
-     `<button class="game-option" type="button" data-answer="${index}" aria-pressed="false">${option}</button>`
-    ).join('');
-    gameFeedback.textContent = '';
-    gameNext.hidden = true;
-    gameNext.textContent = questionIndex === questions.length - 1 ? 'See your result' : 'Next question';
-   }
-
-   gameOptions.addEventListener('click', (event) => {
-    const button = event.target.closest('button[data-answer]');
-    if (!button || answered) return;
-    answered = true;
-    const item = questions[questionIndex];
-    const correct = Number(button.dataset.answer) === item.answer;
-    if (correct) score += 1;
-    gameOptions.querySelectorAll('button').forEach((option) => {
-     option.disabled = true;
-     option.setAttribute('aria-pressed', String(option === button));
-     if (Number(option.dataset.answer) === item.answer) option.classList.add('is-correct');
-    });
-    if (!correct) button.classList.add('is-wrong');
-    gameFeedback.textContent = `${correct ? 'That’s right!' : 'Not quite.'} ${item.note}`;
-    gameNext.hidden = false;
-   });
-
-   gameNext.addEventListener('click', () => {
-    if (complete) {
-     questionIndex = 0;
-     score = 0;
-     complete = false;
-     showQuestion();
-     return;
-    }
-    if (questionIndex < questions.length - 1) {
-     questionIndex += 1;
-     showQuestion();
-     return;
-    }
-    complete = true;
-    gameProgress.textContent = 'ROUND COMPLETE';
-    gameQuestion.textContent = `You scored ${score} out of ${questions.length}.`;
-    gameOptions.innerHTML = '';
-    gameFeedback.textContent = score === questions.length ? 'Perfect score — you’re ready to explore.' : 'Play again to beat your best.';
-    bestScore = Math.max(bestScore, score);
-    localStorage.setItem('korea-travel-quiz-best', String(bestScore));
-    gameBest.textContent = `BEST ${bestScore} / ${questions.length}`;
-    gameNext.textContent = 'Play again';
-   });
-
-   showQuestion();
-  </script>
   <script defer src="animations.js"></script>
  </body>
 </html>

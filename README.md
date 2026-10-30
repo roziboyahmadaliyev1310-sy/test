@@ -1,5 +1,7 @@
 # API Atlas
 
+The homepage is a global travel hub linking the destination planner, weather, currency, and media tools.
+
 Four modular Vanilla JavaScript applications:
 
 - `weather-travel/` - geolocation weather, five-day forecast, units, and travel recommendations.
